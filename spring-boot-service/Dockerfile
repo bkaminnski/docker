@@ -1,6 +1,7 @@
 FROM openjdk:8-jdk-alpine
-ADD ./entrypoint.sh entrypoint.sh
+ADD ./docker-entrypoint.sh docker-entrypoint.sh
+RUN apk --update add bash
 ENV JMX_PORT=\
     DEBUG_PORT=\
     MEMORY_OPTS=
-ENTRYPOINT ["/entrypoint.sh", "-jar", "/app.jar"]
+ENTRYPOINT ["/docker-entrypoint.sh", "-jar", "/app.jar"]

@@ -1,4 +1,21 @@
-#!/bin/sh
+#!/bin/bash
+
+set -e
+
+if  [ "x" != "x$WAIT_FOR" ]; then
+	for WAITING in $WAIT_FOR; do
+		# WAITING with pattern "HOST:PORT:EXPECTED_STRING"
+		WAITING_VALUES=(${WAITING//;/ })
+		HOST=${WAITING_VALUES[0]}
+		PORT=${WAITING_VALUES[1]}
+		EXPECTED=${WAITING_VALUES[2]}
+		
+		until nc $HOST $PORT | grep $EXPECTED; do
+			echo "Waiting for $HOST:$PORT to respond with $EXPECTED"
+			sleep 1
+		done
+	done
+fi
 
 JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom"
 
