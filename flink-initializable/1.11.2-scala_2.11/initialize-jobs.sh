@@ -7,8 +7,6 @@ if [ "x$INITIAL_JOBS" = "x" ]; then
 else
   sleep $INITIAL_JOBS_DELAY
   for INITIAL_JOB in $INITIAL_JOBS; do
-    echo "Initial JOBS: $INITIAL_JOBS"
-    echo "Initial JOB: $INITIAL_JOB"
     # INITIAL_JOB with pattern "MAIN_CLASS;JAR_FILE"
     JOB_VALUES=(${INITIAL_JOB//;/ })
     MAIN_CLASS=${JOB_VALUES[0]}
