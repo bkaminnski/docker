@@ -13,7 +13,7 @@ else
     JAR_FILE="$INITIAL_JOBS_DIR/${JOB_VALUES[1]}"
 
     echo "Trying to initialize $MAIN_CLASS in $JAR_FILE..."
-    until flink run -d -c $MAIN_CLASS $JAR_FILE; do
+    until flink run -d -m $INITIAL_JOBS_JOBMANAGER -c $MAIN_CLASS $JAR_FILE; do
       sleep $INITIAL_JOBS_PERIOD
       echo "Trying to initialize $MAIN_CLASS in $JAR_FILE..."
     done
